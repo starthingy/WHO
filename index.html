@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tomioka Giyuu's Friend</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            color: white;
+            background: url('hi.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            position: relative;
+        }
+        #overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5); /* Darkens the background */
+            z-index: 1;
+        }
+        #content {
+            text-align: center;
+            z-index: 2;
+        }
+        input, button {
+            font-size: 1.2em;
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="overlay"></div>
+    <div id="content">
+        <p>Who is dearest friend to Tomioka Giyuu's heart?</p>
+        <input type="text" id="answer" placeholder="Hurry up">
+        <button onclick="checkAnswer()">Submit</button>
+    </div>
+    <script>
+        function typePhrase(phrase, elementId, callback) {
+            const contentDiv = document.getElementById(elementId);
+            let index = 0;
+            const interval = setInterval(function() {
+                if (index < phrase.length) {
+                    contentDiv.innerHTML += phrase[index];
+                    index++;
+                } else {
+                    clearInterval(interval);
+                    if (callback) callback();
+                }
+            }, 100); // Adjust the interval (in milliseconds) for typing speed
+        }
+
+        function checkAnswer() {
+            const answer = document.getElementById('answer').value.toLowerCase();
+            const contentDiv = document.getElementById('content');
+            if (answer === "sabito") {
+                contentDiv.innerHTML = ''; // Clear content
+                typePhrase("enteresting. Here is your reward.", 'content', function() {
+                    setTimeout(function() {
+                        contentDiv.innerHTML += '<p style="font-size: 5em; margin-top: 20px;">504</p>'; // Display '504' in large font
+                        contentDiv.innerHTML += '<p>Remember it well. Romanian numbers are my favorite after all.</p>'; // Additional message
+                    }, 500); // Delay after the first message is fully typed
+                });
+            } else {
+                contentDiv.innerHTML = `
+                    <p>I don't think so...let's try again.</p>
+                    <p>Who is dearest friend to Tomioka Giyuu's heart?</p>
+                    <input type="text" id="answer" placeholder="Hurry up">
+                    <button onclick="checkAnswer()">Submit</button>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
